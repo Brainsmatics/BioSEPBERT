@@ -896,18 +896,20 @@ class RESLAUGConnectDataProcessor(object):
         with open(path, 'r', encoding='utf8') as f:
             data = json.load(f)
         result = {'text': [], 'label': [], 'flag': []}
-        for i in range(len(data['text'])):
-            text = data['text'][i]
-            sentences = data['sen_dir'][i]
-            start1, end1, label, start2, end2 = sentences
-            if start1 > start2:
-                start1, start2 = start2, start1
-                end1, end2 = end2, end1
-            text1 = text[:start1] + '<s> ' + text[start1:end1+1] + ' </s>' + text[end1+1:start2] +\
-                   '<o> ' + text[start2:end2+1] + ' </o>' + text[end2+1:]
-            result['text'].append(text1)
-            result['label'].append(label)
-            result['flag'].append(('<s>', '</s>', '<o>', '</o>'))
+        for k, v in data.items():
+            for i in range(len(v['text'])):
+                text = v['text'][i]
+                sentences = v['sentence_directions'][i]
+                for sentence in sentences:
+                    start1, end1, label, start2, end2 = sentence
+                    if start1 > start2:
+                        start1, start2 = start2, start1
+                        end1, end2 = end2, end1
+                    text1 = text[:start1] + '<s> ' + text[start1:end1+1] + ' </s>' + text[end1+1:start2] +\
+                           '<o> ' + text[start2:end2+1] + ' </o>' + text[end2+1:]
+                    result['text'].append(text1)
+                    result['label'].append(label)
+                    result['flag'].append(('<s>', '</s>', '<o>', '</o>'))
         return result
 
     def _repre_process(self, path):
