@@ -5,13 +5,13 @@ We provide two versions of pre-trained weights.
 - [BioSEPBERT-NER](http://brainsmatics.org/) - fine-tuning on WhiteText corpus
 - [BioSEPBERT-RE](http://brainsmatics.org/) - fine-tuning on WhiteText connectivity corpus
 # Install
-After downloading the pre-trained weights, use requirements.txt to install BioSEPBERT as follows
+After downloading the pre-trained weights, use requirements.txt to install BioSEPBERT as follows (python version >= 3.7):
 ``pip install -r requirements.txt``
 # Datasets
 We provide a pre-processed version of benchmark datasets for each task as follows:  
 [Named Entity Recognition](https://github.com/Brainsmatics/BioSEPBERT/tree/main/dataset/NER): (36.3 MB), a dataset on brain region named entity recognition  
 [Relation Extraction](https://github.com/Brainsmatics/BioSEPBERT/tree/main/dataset/RE): (118.6 MB), 2 datasets on brain region connectivity relation extraction  
-You can simply get all these on the datasets folder.
+You can simply get all these on the [dataset](https://github.com/Brainsmatics/BioSEPBERT/tree/main/dataset) folder.
 # Fine-tuning
 After downloading one of the pre-trained weights, unpack it to `/model`.
 ## Named Entity Recognition (NER)
