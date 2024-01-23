@@ -5,7 +5,7 @@ We provide two versions of pre-trained weights.
 - [BioSEPBERT-NER](http://brainsmatics.org/) - fine-tuning on WhiteText corpus
 - [BioSEPBERT-RE](http://brainsmatics.org/) - fine-tuning on WhiteText connectivity corpus
 # Install
-After downloading the pre-trained weights, use requirements.txt to install BioSEPBERT as follows (python version >= 3.7):
+After downloading the pre-trained weights, use requirements.txt to install BioSEPBERT as follows (python version >= 3.7):  
 ``pip install -r requirements.txt``
 # Datasets
 We provide a pre-processed version of benchmark datasets for each task as follows:  
