@@ -99,9 +99,9 @@ def main(num):
         tokenizer = tokenizer_class.from_pretrained(os.path.join(args.model_dir, args.model_name))
         tokenizer.add_special_tokens({'additional_special_tokens': ['<s>', '</s>', '<o>', '</o>']})
 
-        # data_processor = REDataProcessor(root=args.data_dir, repre=args.repre)
+        data_processor = REDataProcessor(root=args.data_dir, repre=args.repre)
         # data_processor = RESLAUGDataProcessor(root=args.data_dir, repre=args.repre)
-        data_processor = RESLAUGConnectDataProcessor(root=args.data_dir, repre=args.repre)
+        # data_processor = RESLAUGConnectDataProcessor(root=args.data_dir, repre=args.repre)
         train_samples = data_processor.get_train_sample()
         eval_samples = data_processor.get_dev_sample()
         train_dataset = REDataset(train_samples, data_processor, tokenizer, mode='train', model_type=args.model_type,
@@ -110,15 +110,15 @@ def main(num):
                                  max_length=args.max_length)
         model = model_class.from_pretrained(os.path.join(args.model_dir, args.model_name),
                                             num_labels=data_processor.num_labels)
-        # model = REModel(tokenizer, model, num_labels=data_processor.num_labels)
-        # trainer = RETrainer(args=args, model=model, data_processor=data_processor,
-        #                    tokenizer=tokenizer, train_dataset=train_dataset, eval_dataset=eval_dataset,
-        #                    logger=logger, model_class=REModel)
+        model = REModel(tokenizer, model, num_labels=data_processor.num_labels)
+        trainer = RETrainer(args=args, model=model, data_processor=data_processor,
+                           tokenizer=tokenizer, train_dataset=train_dataset, eval_dataset=eval_dataset,
+                           logger=logger, model_class=REModel)
 
-        model = REConnectModel(tokenizer, model, num_labels=data_processor.num_labels)
-        trainer = REConnectTrainer(args=args, model=model, data_processor=data_processor,
-                                   tokenizer=tokenizer, train_dataset=train_dataset, eval_dataset=eval_dataset,
-                                   logger=logger, model_class=REConnectModel)
+        # model = REConnectModel(tokenizer, model, num_labels=data_processor.num_labels)
+        # trainer = REConnectTrainer(args=args, model=model, data_processor=data_processor,
+        #                            tokenizer=tokenizer, train_dataset=train_dataset, eval_dataset=eval_dataset,
+        #                            logger=logger, model_class=REConnectModel)
 
         p_re_eval, r_re_eval, f_re_eval, _ = trainer.train()
 
@@ -130,24 +130,24 @@ def main(num):
         tokenizer = tokenizer_class.from_pretrained(args.output_dir)
         tokenizer.add_special_tokens({'additional_special_tokens': ['<s>', '</s>', '<o>', '</o>']})
 
-        # data_processor = REDataProcessor(root=args.data_dir, repre=args.repre)
+        data_processor = REDataProcessor(root=args.data_dir, repre=args.repre)
         # data_processor = RESLAUGDataProcessor(root=args.data_dir, repre=args.repre)
-        data_processor = RESLAUGConnectDataProcessor(root=args.data_dir, repre=args.repre)
+        # data_processor = RESLAUGConnectDataProcessor(root=args.data_dir, repre=args.repre)
         test_samples = data_processor.get_test_sample()
         test_dataset = REDataset(test_samples, data_processor, tokenizer, mode='test', model_type=args.model_type,
                                  max_length=args.max_length)
 
         model = model_class.from_pretrained(os.path.join(args.model_dir, args.model_name),
                                             num_labels=data_processor.num_labels)
-        # model = REModel(tokenizer, model, num_labels=data_processor.num_labels)
-        # model.load_state_dict(torch.load(os.path.join(args.output_dir, 'pytorch_model.pth')))
-        # trainer = RETrainer(args=args, model=model, data_processor=data_processor,
-        #                    tokenizer=tokenizer, logger=logger, model_class=REModel)
-
-        model = REConnectModel(tokenizer, model, num_labels=data_processor.num_labels)
+        model = REModel(tokenizer, model, num_labels=data_processor.num_labels)
         model.load_state_dict(torch.load(os.path.join(args.output_dir, 'pytorch_model.pth')))
-        trainer = REConnectTrainer(args=args, model=model, data_processor=data_processor,
-                                   tokenizer=tokenizer, logger=logger, model_class=REConnectModel)
+        trainer = RETrainer(args=args, model=model, data_processor=data_processor,
+                           tokenizer=tokenizer, logger=logger, model_class=REModel)
+        #
+        # model = REConnectModel(tokenizer, model, num_labels=data_processor.num_labels)
+        # model.load_state_dict(torch.load(os.path.join(args.output_dir, 'pytorch_model.pth')))
+        # trainer = REConnectTrainer(args=args, model=model, data_processor=data_processor,
+        #                            tokenizer=tokenizer, logger=logger, model_class=REConnectModel)
         p_re_test, r_re_test, f_re_test, _ = trainer.predict(model=model, test_samples=test_dataset)
 
     out_re = (p_re_eval, r_re_eval, f_re_eval, p_re_test, r_re_test, f_re_test)
