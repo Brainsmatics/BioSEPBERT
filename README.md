@@ -3,8 +3,8 @@ This repository provides the code for BioSEPBERT, a neuroscience representation 
 # Download
 We provide two versions of pre-trained weights.
 - [BioSEPBERT-NER](http://brainsmatics.org/) - fine-tuning on WhiteText corpus
-- [BioSEPBERT-RE](http://brainsmatics.org/) - fine-tuning on WhiteText connectivity corpus
-You can also use other pre-trained weights as follows:
+- [BioSEPBERT-RE](http://brainsmatics.org/) - fine-tuning on WhiteText connectivity corpus  
+You can also use other pre-trained weights as follows:  
 - [BioBERT](https://github.com/dmis-lab/biobert) - fine-tuning on biomedical corpus
 # Install
 After downloading the pre-trained weights, use requirements.txt to install BioSEPBERT as follows (python version >= 3.7):  
