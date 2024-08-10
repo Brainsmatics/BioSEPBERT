@@ -14,6 +14,10 @@ After downloading the pre-trained weights, use requirements.txt to install BioSE
 ```  
 pip install -r requirements.txt  
 ```
+If you want install cuda version:
+```  
+pip install torch==1.8.1+cu101 torchvision==0.9.1+cu101 torchaudio==0.8.1 -f https://download.pytorch.org/whl/torch_stable.html
+```
 
 # Datasets
 We provide a pre-processed version of benchmark datasets for each task as follows:  
