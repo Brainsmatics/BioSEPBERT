@@ -10,7 +10,7 @@ You can also use other pre-trained weights as follows:
 - [BioBERT](https://github.com/dmis-lab/biobert) - fine-tuning on biomedical corpus
 
 # Install
-After downloading the pre-trained weights, use requirements.txt to install BioSEPBERT as follows (python version >= 3.7):  
+After downloading the pre-trained weights, use requirements.txt to install BioSEPBERT as follows (python version >= 3.8):  
 ```  
 pip install -r requirements.txt  
 ```
