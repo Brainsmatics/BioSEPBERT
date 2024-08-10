@@ -11,28 +11,32 @@ import xlwt
 import numpy as np
 from transformers import BertTokenizer, BertModel
 from NER.utils import init_logger, seed_everything
-from NER.data.dataset import SEPDataset
+from NER.data.dataset import BioSEPDataset
 from NER.data.data_process import NERDataProcessor
-from NER.trainer.trainer import BERT_SEPTrainer
-from NER.model.modeling import BERT_SEPModel
+from NER.trainer.trainer import BioSEP_Trainer
+from NER.model.modeling import BioSEPBERT_Model
 
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
 NER_MODEL_CLASS = {
-    'pubmedbert': (BertTokenizer, BertModel),
+    'BioSEPBERT': (BertTokenizer, BertModel),
+    'biobert': (BertTokenizer, BertModel),
+    'PubMedBERT': (BertTokenizer, BertModel),
+    'scibert': (BertTokenizer, BertModel),
+    'ClinicalBERT': (BertTokenizer, BertModel),
 }
 
 NER_CUSTOM_MODEL_CLASS = {
-    'BioSEPBERT': BERT_SEPModel,
+    'BioSEPBERT': BioSEPBERT_Model,
 }
 
 TASK_DATASET_CLASS = {
-    'BioSEPBERT': (SEPDataset, NERDataProcessor),
+    'BioSEPBERT': (BioSEPDataset, NERDataProcessor),
 }
 
 TASK_TRAINER = {
-    'BioSEPBERT': BERT_SEPTrainer,
+    'BioSEPBERT': BioSEP_Trainer,
 }
 
 parser = argparse.ArgumentParser()
@@ -130,6 +134,7 @@ def main(num):
         test_samples = data_processor.get_test_sample()
         test_dataset = dataset_class(test_samples, data_processor, tokenizer, mode='test',
                                      model_type=args.model_type, max_length=args.max_length)
+        model.load_state_dict(torch.load(os.path.join(args.output_dir, 'pytorch_model.pth')))
         test_p, test_r, test_f1, _ = trainer.predict(test_dataset=test_dataset, model=model)
         output += "Test results: Precision: %6.2f%%; Recall: %6.2f%%; F1: %6.2f%%" % (test_p, test_r, test_f1) + '\n'
 

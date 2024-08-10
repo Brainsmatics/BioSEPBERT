@@ -7,11 +7,11 @@ import xlwt
 import torch
 from transformers import BertTokenizer, BertModel
 
-from NRE.model.modeling import REModel
-from NRE.trainer.trainer import RETrainer
+from NRE.model.modeling import REDirectionModel
+from NRE.trainer.trainer import REDirectionTrainer
 from NRE.utils import init_logger, seed_everything
 from NRE.data.dataset import REDataset
-from NRE.data.data_process import REDataProcessor, RESLDataProcessor
+from NRE.data.data_process import RESLAUGDirectionDataProcessor
 
 
 MODEL_CLASS = {
@@ -103,8 +103,7 @@ def main(num):
         tokenizer = tokenizer_class.from_pretrained(os.path.join(args.model_dir, args.model_name))
         tokenizer.add_special_tokens({'additional_special_tokens': ['<s>', '</s>', '<o>', '</o>']})
 
-        data_processor = REDataProcessor(root=args.data_dir, repre=args.repre)
-        # data_processor = RESLDataProcessor(root=args.data_dir, repre=args.repre)
+        data_processor = RESLAUGDirectionDataProcessor(root=args.data_dir, repre=args.repre)
         train_samples = data_processor.get_train_sample()
         eval_samples = data_processor.get_dev_sample()
         train_dataset = REDataset(train_samples, data_processor, tokenizer, mode='train', model_type=args.model_type,
@@ -113,10 +112,11 @@ def main(num):
                                  max_length=args.max_length)
         model = model_class.from_pretrained(os.path.join(args.model_dir, args.model_name),
                                             num_labels=data_processor.num_labels)
-        model = REModel(tokenizer, model, num_labels=data_processor.num_labels)
-        trainer = RETrainer(args=args, model=model, data_processor=data_processor,
-                           tokenizer=tokenizer, train_dataset=train_dataset, eval_dataset=eval_dataset,
-                           logger=logger, model_class=REModel)
+        model = REDirectionModel(tokenizer, model, num_labels=data_processor.num_labels)
+        trainer = REDirectionTrainer(args=args, model=model, data_processor=data_processor,
+                                   tokenizer=tokenizer, train_dataset=train_dataset, eval_dataset=eval_dataset,
+                                   logger=logger, model_class=REDirectionModel)
+
         p_re_eval, r_re_eval, f_re_eval, _ = trainer.train()
 
     if args.do_predict:
@@ -127,20 +127,18 @@ def main(num):
         logger.info('Training/evaluation parameters %s', args)
         tokenizer = tokenizer_class.from_pretrained(os.path.join(args.model_dir, args.model_name))
         tokenizer.add_special_tokens({'additional_special_tokens': ['<s>', '</s>', '<o>', '</o>']})
-
-        data_processor = REDataProcessor(root=args.data_dir, repre=args.repre)
-        # data_processor = RESLDataProcessor(root=args.data_dir, repre=args.repre)
+        data_processor = RESLAUGDirectionDataProcessor(root=args.data_dir, repre=args.repre)
         test_samples = data_processor.get_test_sample()
         test_dataset = REDataset(test_samples, data_processor, tokenizer, mode='test', model_type=args.model_type,
                                  max_length=args.max_length)
 
         model = model_class.from_pretrained(os.path.join(args.model_dir, args.model_name),
                                             num_labels=data_processor.num_labels)
-        model = REModel(tokenizer, model, num_labels=data_processor.num_labels)
+        model = REDirectionModel(tokenizer, model, num_labels=data_processor.num_labels)
         model.load_state_dict(torch.load(os.path.join(args.model_dir, args.model_name, 'pytorch_model.pth')))
         # model.load_state_dict(torch.load(os.path.join(args.output_dir, 'pytorch_model.pth')))
-        trainer = RETrainer(args=args, model=model, data_processor=data_processor,
-                           tokenizer=tokenizer, logger=logger, model_class=REModel)
+        trainer = REDirectionTrainer(args=args, model=model, data_processor=data_processor,
+                                   tokenizer=tokenizer, logger=logger, model_class=REDirectionModel)
         p_re_test, r_re_test, f_re_test, _ = trainer.predict(model=model, test_samples=test_dataset)
 
     out_re = (p_re_eval, r_re_eval, f_re_eval, p_re_test, r_re_test, f_re_test)
