@@ -126,43 +126,6 @@ class NERDataProcessor(object):
                 outputs['text'].append(text)
                 outputs['label'].append(label)
                 text, label = [], []
-
-        if 'train.tsv' in path:
-            '''训练数据集添加验证集'''
-            with open(self.dev_path, 'r', encoding='utf-8') as f:
-                lines = f.readlines()
-            lines = [line.strip() for line in lines]
-            text, label = [], []
-            for line in lines:
-                if line:
-                    text_ = line.split(' ')[0]
-                    label_ = line.split(' ')[1] if not self.predict else 'O'
-                    text.append(text_)
-                    label.append(label_)
-                elif text:
-                    outputs['text'].append(text)
-                    outputs['label'].append(label)
-                    text, label = [], []
-            '''Data augmentation'''
-            # with open('../dataset/BrainRegion.tsv', 'r', encoding='utf-8') as f:
-            #     lines = f.readlines()
-            # lines = [line.strip() for line in lines]
-            # text_all, label_all = [], []
-            # text, label = [], []
-            # for line in lines:
-            #     if line:
-            #         text_ = line.split(' ')[0]
-            #         label_ = line.split(' ')[1] if not self.predict else 'O'
-            #         text.append(text_)
-            #         label.append(label_)
-            #     elif text:
-            #         text_all.append(text)
-            #         label_all.append(label)
-            #         text, label = [], []
-            # text_all = text_all[:len(text_all) * 4 // 4]
-            # label_all = label_all[:len(label_all) * 4 // 4]
-            # outputs['text'].extend(text_all)
-            # outputs['label'].extend(label_all)
         return outputs
 
     def _pre_cross_process(self, path, ids):
@@ -183,21 +146,6 @@ class NERDataProcessor(object):
                 label = [l.split(' ')[1] if not self.predict else 'O' for l in lines.split('\n')]
                 outputs['text'].append(text)
                 outputs['label'].append(label)
-        '''Data augmentation'''
-        # with open('../dataset/BrainRegion.tsv', 'r', encoding='utf-8') as f:
-        #     lines = f.readlines()
-        # lines = [line.strip() for line in lines]
-        # text, label = [], []
-        # for line in lines:
-        #     if line:
-        #         text_ = line.split(' ')[0]
-        #         label_ = line.split(' ')[1] if not self.predict else 'O'
-        #         text.append(text_)
-        #         label.append(label_)
-        #     elif text:
-        #         outputs['text'].append(text)
-        #         outputs['label'].append(label)
-        #         text, label = [], []
         return outputs
 
     def _get_dictionary_tree(self):
