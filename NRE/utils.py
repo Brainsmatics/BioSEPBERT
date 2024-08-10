@@ -1,6 +1,6 @@
 # encoding: utf-8
 # @author: xkchai
-# @license: (C) Copyright 2017-2023, Node Supply Chain Manager Corporation Limited.
+# @license: (C) Copyright 2020-2024, Node Supply Chain Manager Corporation Limited.
 # @contact: chaixiaokang@hust.edu.cn
 
 import os

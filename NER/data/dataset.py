@@ -10,7 +10,7 @@ from torch.utils.data import Dataset
 from typing import List, Dict, Set, Union, Optional
 
 
-class SEPDataset(Dataset):
+class BioSEPDataset(Dataset):
     def __init__(
             self,
             samples,
@@ -21,7 +21,7 @@ class SEPDataset(Dataset):
             model_type='bert',
             ngram_dict=None
     ):
-        super(SEPDataset, self).__init__()
+        super(BioSEPDataset, self).__init__()
         self.data_processor = data_processor
         self.tokenizer = tokenizer
         self.max_length = max_length
@@ -38,14 +38,14 @@ class SEPDataset(Dataset):
         text = self.texts[idx]
         if self.labels:
             label = self.labels[idx]
-            inputs = convert_examples_to_SEP_tokens(text, label, self.max_length, self.tokenizer,
+            inputs = convert_examples_to_BioSEP_tokens(text, label, self.max_length, self.tokenizer,
                                                      self.data_processor.label2id)
             return inputs['input_ids'], inputs['token_type_ids'], inputs['attention_mask'], \
                    inputs['label_ids'], inputs['label_mask_ids'], \
                    inputs['B_start_ids'], inputs['B_end_ids'], inputs['I_start_ids'], inputs['I_end_ids']
 
         else:
-            inputs = convert_examples_to_SEP_tokens(text, None, self.max_length, self.tokenizer,
+            inputs = convert_examples_to_BioSEP_tokens(text, None, self.max_length, self.tokenizer,
                                                      self.data_processor.label2id)
             return inputs['input_ids'], inputs['token_type_ids'], inputs['attention_mask'],\
                    inputs['label_ids'], inputs['label_mask_ids'], \
@@ -55,7 +55,7 @@ class SEPDataset(Dataset):
         return len(self.texts)
 
 
-def convert_examples_to_SEP_tokens(text: List[str], label: Optional[List[str]], max_seq_length=128,
+def convert_examples_to_BioSEP_tokens(text: List[str], label: Optional[List[str]], max_seq_length=128,
                                tokenizer=None, label2id=None, return_tensors=False):
     inputs = {'input_ids': [], 'attention_mask': [], 'token_type_ids': [],
               'label_ids': [], 'label_mask_ids': [],

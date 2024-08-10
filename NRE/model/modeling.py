@@ -36,9 +36,9 @@ class REModel(nn.Module):
         return logits
 
 
-class REConnectModel(nn.Module):
+class REDirectionModel(nn.Module):
     def __init__(self, tokenizer, model, num_labels):
-        super(REConnectModel, self).__init__()
+        super(REDirectionModel, self).__init__()
         self.model = model
         self.model.resize_token_embeddings(len(tokenizer))
         self.classifier = nn.Linear(in_features=self.model.config.hidden_size*2, out_features=num_labels)

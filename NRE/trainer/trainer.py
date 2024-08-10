@@ -1,6 +1,6 @@
 # encoding: utf-8
 # @author: xkchai
-# @license: (C) Copyright 2017-2023, Node Supply Chain Manager Corporation Limited.
+# @license: (C) Copyright 2020-2024, Node Supply Chain Manager Corporation Limited.
 # @contact: chaixiaokang@hust.edu.cn
 
 
@@ -353,7 +353,7 @@ class RETrainer(Trainer):
         return
 
 
-class REConnectTrainer(Trainer):
+class REDirectionTrainer(Trainer):
     def __init__(
             self,
             args,
@@ -366,7 +366,7 @@ class REConnectTrainer(Trainer):
             eval_dataset=None,
             ngram_dict=None
     ):
-        super(REConnectTrainer, self).__init__(
+        super(REDirectionTrainer, self).__init__(
             args=args,
             model=model,
             data_processor=data_processor,

@@ -1,6 +1,6 @@
 # encoding: utf-8
 # @author: xkchai
-# @license: (C) Copyright 2017-2023, Node Supply Chain Manager Corporation Limited.
+# @license: (C) Copyright 2020-2024, Node Supply Chain Manager Corporation Limited.
 # @contact: chaixiaokang@hust.edu.cn
 
 
@@ -205,7 +205,7 @@ class Trainer(object):
         )
 
 
-class BERT_SEPTrainer(Trainer):
+class BioSEP_Trainer(Trainer):
     def __init__(
             self,
             args,
@@ -218,7 +218,7 @@ class BERT_SEPTrainer(Trainer):
             eval_dataset=None,
             ngram_dict=None,
     ):
-        super(BERT_SEPTrainer, self).__init__(
+        super(BioSEP_Trainer, self).__init__(
             args=args,
             model=model,
             data_processor=data_processor,

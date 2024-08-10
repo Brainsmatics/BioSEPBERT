@@ -4,9 +4,9 @@ import torch.nn as nn
 import numpy as np
 
 
-class BERT_SEPModel(nn.Module):
+class BioSEPBERT_Model(nn.Module):
     def __init__(self, encoder):
-        super(BERT_SEPModel, self).__init__()
+        super(BioSEPBERT_Model, self).__init__()
         self.hidden_size = 768
         self.features_size = 64
         self.num_classes = 3
