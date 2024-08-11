@@ -11,7 +11,7 @@ If you want to install the cuda version, do the following:
 pip install torch==1.8.1+cu101 torchvision==0.9.1+cu101 torchaudio==0.8.1 -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
-## Model Download
+## Models
 We provide two versions of pre-trained weights.  
 - [BioSEPBERT-NER](https://drive.google.com/drive/folders/1qdpBYKRhDZM4z9xgBwC63SfI_RCfLam6?usp=sharing) - fine-tuning on WhiteText corpus  
 - [BioSEPBERT-RE](https://drive.google.com/drive/folders/1ISGetHt3Ln-dSgjgEdoBu3XeTXQuCj28?usp=sharing) - fine-tuning on WhiteText connectivity corpus
