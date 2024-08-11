@@ -104,6 +104,7 @@ def main(num):
         tokenizer.add_special_tokens({'additional_special_tokens': ['<s>', '</s>', '<o>', '</o>']})
 
         data_processor = REDataProcessor(root=args.data_dir, repre=args.repre)
+        # If you want to eval sentence-level relations, use the following line
         # data_processor = RESLDataProcessor(root=args.data_dir, repre=args.repre)
         train_samples = data_processor.get_train_sample()
         eval_samples = data_processor.get_dev_sample()
@@ -129,6 +130,7 @@ def main(num):
         tokenizer.add_special_tokens({'additional_special_tokens': ['<s>', '</s>', '<o>', '</o>']})
 
         data_processor = REDataProcessor(root=args.data_dir, repre=args.repre)
+        # If you want to eval sentence-level relations, use the following line
         # data_processor = RESLDataProcessor(root=args.data_dir, repre=args.repre)
         test_samples = data_processor.get_test_sample()
         test_dataset = REDataset(test_samples, data_processor, tokenizer, mode='test', model_type=args.model_type,
@@ -138,6 +140,7 @@ def main(num):
                                             num_labels=data_processor.num_labels)
         model = REModel(tokenizer, model, num_labels=data_processor.num_labels)
         model.load_state_dict(torch.load(os.path.join(args.model_dir, args.model_name, 'pytorch_model.pth')))
+        # If you want to train the model, please use the following line to do so
         # model.load_state_dict(torch.load(os.path.join(args.output_dir, 'pytorch_model.pth')))
         trainer = RETrainer(args=args, model=model, data_processor=data_processor,
                            tokenizer=tokenizer, logger=logger, model_class=REModel)

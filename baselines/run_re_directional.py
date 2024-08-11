@@ -136,6 +136,7 @@ def main(num):
                                             num_labels=data_processor.num_labels)
         model = REDirectionModel(tokenizer, model, num_labels=data_processor.num_labels)
         model.load_state_dict(torch.load(os.path.join(args.model_dir, args.model_name, 'pytorch_model.pth')))
+        # If you want to train the model, please use the following line to do so
         # model.load_state_dict(torch.load(os.path.join(args.output_dir, 'pytorch_model.pth')))
         trainer = REDirectionTrainer(args=args, model=model, data_processor=data_processor,
                                    tokenizer=tokenizer, logger=logger, model_class=REDirectionModel)

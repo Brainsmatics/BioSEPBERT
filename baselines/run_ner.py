@@ -134,7 +134,9 @@ def main(num):
         test_samples = data_processor.get_test_sample()
         test_dataset = dataset_class(test_samples, data_processor, tokenizer, mode='test',
                                      model_type=args.model_type, max_length=args.max_length)
-        model.load_state_dict(torch.load(os.path.join(args.output_dir, 'pytorch_model.pth')))
+        model.load_state_dict(torch.load(os.path.join(args.model_dir, args.model_name, 'pytorch_model.pth')))
+        # If you want to train the model, please use the following line to do so
+        # model.load_state_dict(torch.load(os.path.join(args.output_dir, 'pytorch_model.pth')))
         test_p, test_r, test_f1, _ = trainer.predict(test_dataset=test_dataset, model=model)
         output += "Test results: Precision: %6.2f%%; Recall: %6.2f%%; F1: %6.2f%%" % (test_p, test_r, test_f1) + '\n'
 
