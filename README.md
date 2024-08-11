@@ -28,7 +28,7 @@ You can get all datasets on the [dataset](https://drive.google.com/drive/folders
 
 ## Fine-tuning
 After downloading one of the pre-trained weights, unpack it to `/model`.  
-You can change the `model_name` and `model_type` to PubMedBERT or biobert to use other pre-trained weights, the other parameters can also be changed refer to our paper.
+You can change the `model_name` and `model_type` to `PubMedBERT` or `biobert` to use other pre-trained weights, the other parameters can also be changed refer to our paper.
 
 ### Named Entity Recognition (NER)
 Following command runs fine-tuning code on NER with default arguments.  
