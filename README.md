@@ -27,7 +27,7 @@ We provide a pre-processed version of benchmark datasets for each task as follow
 You can get all datasets on the [dataset](https://drive.google.com/drive/folders/1XHLfWZYgn7mu-Dmo8BaFzDz7coem8P4N?usp=sharing) folder.
 
 # Fine-tuning
-After downloading one of the pre-trained weights, unpack it to `/model`.
+After downloading one of the pre-trained weights, unpack it to `/model`.  
 You can change model_name/model_type to PubMedBERT or biobert to use other pre-trained weights, the other parameters can also be changed refer to our paper.
 
 ## Named Entity Recognition (NER)
