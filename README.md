@@ -44,8 +44,11 @@ python run_re.py --task_name=BioSEPBERT --data_dir=../dataset/RE/1 --model_dir=.
 
 # Simply Evaluation
 
-## Named Entity Recognition (NER)
+### Named Entity Recognition (NER)
 The following command runs on simple evaluation. 
 ```  
 python run_ner.py --task_name=BioSEPBERT --data_dir=../dataset/NER/1 --model_dir=../model/ --model_name=BioSEPBERT --model_type=BioSEPBERT --output_dir=../ --max_length=512 --train_batch_size=16 --eval_batch_size=16 --learning_rate=5e-5 --epochs=3 --logging_steps=-1 --save_steps=10 --seed=2022 --do_predict
 ```
+
+# Contact
+For questions and additional information, or would like to give us any suggestions, please contact us. The email address: aali@hust.edu.cn.
