@@ -28,20 +28,19 @@ You can get all datasets on the [dataset](https://drive.google.com/drive/folders
 
 # Fine-tuning
 After downloading one of the pre-trained weights, unpack it to `/model`.
+You can change model_name/model_type to PubMedBERT or biobert to use other pre-trained weights, the other parameters can also be changed refer to our paper.
 
 ## Named Entity Recognition (NER)
 Following command runs fine-tuning code on NER with default arguments.  
 ```  
 python run_ner.py --task_name=BioSEPBERT --data_dir=../dataset/NER/1 --model_dir=../model/ --model_name=BioSEPBERT --model_type=BioSEPBERT --output_dir=../ --max_length=512 --train_batch_size=16 --eval_batch_size=16 --learning_rate=5e-5 --epochs=3 --logging_steps=-1 --save_steps=10 --seed=2022 --do_train --do_predict
 ```
-You can change model_name/model_type to PubMedBERT or biobert to use other pre-trained weights, the other parameters can also be changed refer to our paper.
 
 ## Relation Extraction (RE)
 Following command runs fine-tuning code on RE with default arguments.  
 ```  
 python run_re.py --task_name=BioSEPBERT --data_dir=../dataset/RE/1 --model_dir=../model/ --model_name=BioSEPBERT --model_type=BioSEPBERT --output_dir=../ --max_length=512 --train_batch_size=16 --eval_batch_size=16 --learning_rate=5e-5 --epochs=3 --warmup_proportion=0.1 --earlystop_patience=100 --max_grad_norm=0.0 --logging_steps=-1 --save_steps=1 --seed=2021 --do_train --do_predict
 ```
-You can change model_name/model_type to PubMedBERT or biobert to use other pre-trained weights, the other parameters can also be changed refer to our paper.
 
 # Simply Evaluation
 
@@ -49,10 +48,4 @@ You can change model_name/model_type to PubMedBERT or biobert to use other pre-t
 The following command runs on simple evaluation. 
 ```  
 python run_ner.py --task_name=BioSEPBERT --data_dir=../dataset/NER/1 --model_dir=../model/ --model_name=BioSEPBERT --model_type=BioSEPBERT --output_dir=../ --max_length=512 --train_batch_size=16 --eval_batch_size=16 --learning_rate=5e-5 --epochs=3 --logging_steps=-1 --save_steps=10 --seed=2022 --do_predict
-```
-
-## Relation Extraction (RE)
-The following command runs on simple evaluation.  
-```  
-python run_re.py --task_name=BioSEPBERT --data_dir=../dataset/RE/1 --model_dir=../model/ --model_name=BioSEPBERT --model_type=BioSEPBERT --output_dir=../ --max_length=512 --train_batch_size=16 --eval_batch_size=16 --learning_rate=5e-5 --epochs=3 --warmup_proportion=0.1 --earlystop_patience=100 --max_grad_norm=0.0 --logging_steps=-1 --save_steps=1 --seed=2021 --do_predict
 ```
