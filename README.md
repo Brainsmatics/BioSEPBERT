@@ -22,8 +22,8 @@ You can also use other pre-trained weights as follows:
 
 # Datasets
 We provide a pre-processed version of benchmark datasets for each task as follows:  
-[Named Entity Recognition](https://github.com/Brainsmatics/BioSEPBERT/tree/main/dataset/NER): (36.3 MB), a dataset on brain region named entity recognition
-[Relation Extraction](https://github.com/Brainsmatics/BioSEPBERT/tree/main/dataset/RE): (46.6 MB), a dataset on brain region connectivity relation extraction
+[Named Entity Recognition](https://github.com/Brainsmatics/BioSEPBERT/tree/main/dataset/NER): (36.3 MB), a dataset on brain region named entity recognition  
+[Relation Extraction](https://github.com/Brainsmatics/BioSEPBERT/tree/main/dataset/RE): (46.6 MB), a dataset on brain region connectivity relation extraction  
 You can get all datasets on the [dataset](https://drive.google.com/drive/folders/1XHLfWZYgn7mu-Dmo8BaFzDz7coem8P4N?usp=sharing) folder.
 
 # Fine-tuning
