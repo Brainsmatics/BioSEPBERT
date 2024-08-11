@@ -8,7 +8,7 @@ We provide two versions of pre-trained weights.
 
 You can also use other pre-trained weights as follows:  
 - [BioBERT](https://drive.google.com/drive/folders/1YQ081Q0Z7qrEcFsove7iflDV0W4byyrU?usp=sharing) - fine-tuning on biomedical corpus
-- [PubMedBERT](https://drive.google.com/drive/folders/1YQ081Q0Z7qrEcFsove7iflDV0W4byyrU?usp=sharing) - fine-tuning on biomedical corpus
+- [PubMedBERT](https://drive.google.com/drive/folders/1IjaxywOOyeocPDiBlaeScwgxYFDh5lH1?usp=drive_link) - fine-tuning on biomedical corpus
   
 # Install
 After downloading the pre-trained weights, use requirements.txt to install BioSEPBERT as follows (python version >= 3.8):  
