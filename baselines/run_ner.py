@@ -111,7 +111,7 @@ def main(num):
 
     logger.info('Training/evaluation parameters %s', args)
 
-    data_processor = data_processor_class(root=args.data_dir, augmentation=False)
+    data_processor = data_processor_class(root=args.data_dir, Denoising=False)
     tokenizer = tokenizer_class.from_pretrained(os.path.join(args.model_dir, args.model_name))
     model = model_class.from_pretrained(os.path.join(args.model_dir, args.model_name),
                                         num_labels=data_processor.num_labels)
