@@ -51,7 +51,7 @@ class Trie:
 
 class NERDataProcessor(object):
     def __init__(self, root, is_lower=True, no_entity_label='O', predict=False, cross_validation=None,
-                 train_ids=None, dev_ids=None, test_ids=None, augmentation=False):
+                 train_ids=None, dev_ids=None, test_ids=None, Denoising=False):
         self.task_data_dir = root
         self.train_path = os.path.join(self.task_data_dir, 'train.tsv')
         self.dev_path = os.path.join(self.task_data_dir, 'devel.tsv')
@@ -68,14 +68,14 @@ class NERDataProcessor(object):
         self.dev_ids = dev_ids
         self.test_ids = test_ids
         self.predict = predict
-        self.augmentation = augmentation
-        if self.augmentation:
+        self.Denoising = Denoising
+        if self.Denoising:
             self.dictionary, self.dictionary_correct, self.entity_s = self._get_dictionary_tree()
 
     def get_train_sample(self):
         if self.cross_validation:
             return self._pre_cross_process(self.cross_data, self.train_ids)
-        elif self.augmentation:
+        elif self.Denoising:
             return self._pre_process_dictionary(self._pre_process(self.train_path))
         else:
             return self._pre_process(self.train_path)
@@ -83,7 +83,7 @@ class NERDataProcessor(object):
     def get_dev_sample(self):
         if self.cross_validation:
             return self._pre_cross_process(self.cross_data, self.dev_ids)
-        elif self.augmentation:
+        elif self.Denoising:
             return self._pre_process_dictionary(self._pre_process(self.dev_path))
         else:
             return self._pre_process(self.dev_path)
@@ -91,7 +91,7 @@ class NERDataProcessor(object):
     def get_test_sample(self):
         if self.cross_validation:
             return self._pre_cross_process(self.cross_data, self.test_ids)
-        elif self.augmentation and not self.predict:
+        elif self.Denoising and not self.predict:
             return self._pre_process_dictionary(self._pre_process(self.test_path))
         else:
             return self._pre_process(self.test_path)
@@ -126,6 +126,32 @@ class NERDataProcessor(object):
                 outputs['text'].append(text)
                 outputs['label'].append(label)
                 text, label = [], []
+        '''Augmentation'''
+        # for line in lines:
+        #     if line:
+        #         text_ = line.split(' ')[0]
+        #         label_ = line.split(' ')[1] if not self.predict else 'O'
+        #         text.append(text_)
+        #         label.append(label_)
+        #     elif text:
+        #         outputs['text'].append(text)
+        #         outputs['label'].append(label)
+        #         text, label = [], []
+        # if 'train.tsv' in path:
+        #     with open(self.dev_path, 'r', encoding='utf-8') as f:
+        #         lines = f.readlines()
+        #     lines = [line.strip() for line in lines]
+        #     text, label = [], []
+        #     for line in lines:
+        #         if line:
+        #             text_ = line.split(' ')[0]
+        #             label_ = line.split(' ')[1] if not self.predict else 'O'
+        #             text.append(text_)
+        #             label.append(label_)
+        #         elif text:
+        #             outputs['text'].append(text)
+        #             outputs['label'].append(label)
+        #             text, label = [], []
         return outputs
 
     def _pre_cross_process(self, path, ids):
