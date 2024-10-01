@@ -365,7 +365,6 @@ class BioSEP_Trainer(Trainer):
         preds_bert = preds_bert / preds_bert.sum(axis=1, keepdims=1)
         preds_num_mask = np.argmax(preds_bert, axis=-1)
         preds_pro_mask = [preds_bert[i][preds_num_mask[i]] for i in range(len(preds_num_mask))]
-        #'''
         self._save_real_predict(preds_num_mask, 'test')
         if not self.data_processor.predict:
             preds_bert = np.argmax(preds_bert, axis=-1)
@@ -375,7 +374,6 @@ class BioSEP_Trainer(Trainer):
             conll_data = ['data ' + self.data_processor.id2label[test_labels_mask[i]] + ' ' + \
                           self.data_processor.id2label[preds_SEP[i]] for i in range(len(preds_SEP))]
             (p_strict, r_strict, f1_strict) = conll_eval(conll_data).evaluate_conll_file()
-        #'''
         return p_strict, r_strict, f1_strict, preds_SEP,
 
     def SEtrans(self, B_start_logits,B_end_logits,  I_start_logits, I_end_logits, max_seq):
