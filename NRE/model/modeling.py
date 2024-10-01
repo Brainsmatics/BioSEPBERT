@@ -26,7 +26,6 @@ class REModel(nn.Module):
             #sub_end_entity = last_hidden_state[i, sub_end_idx, :].view(hidden_size, )   # s_end: hidden,
             obj_start_entity = last_hidden_state[i, obj_start_idx, :].view(hidden_size, )   # o_start: hidden,
             #obj_end_entity = last_hidden_state[i, obj_end_idx, :].view(hidden_size, )   # o_end: hidden,
-            #entity_hidden_state[i] = torch.cat([sub_start_entity, sub_end_entity, obj_start_entity, obj_end_entity], dim=-1)
             entity_hidden_state[i] = torch.cat([sub_start_entity, obj_start_entity], dim=-1)
         entity_hidden_state = entity_hidden_state.to(device)
         logits = self.classifier(entity_hidden_state)
