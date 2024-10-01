@@ -1,8 +1,3 @@
-# encoding: utf-8
-# @author: xkchai
-# @contact: chaixiaokang@hust.edu.cn
-
-
 import torch
 import numpy as np
 from torch.utils.data import Dataset
