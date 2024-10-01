@@ -23,7 +23,6 @@ class BioSEPBERT_Model(nn.Module):
         outputs = self.model(input_ids=input_ids, token_type_ids=token_type_ids,
                              attention_mask=attention_mask)
         logits = outputs.get('last_hidden_state')
-        # logits = outputs.get('logits')
         bert_layer = self.bert_layer(logits)
         B_start = self.start_layer1(logits).sigmoid().squeeze(-1)
         B_end = self.end_layer1(logits).sigmoid().squeeze(-1)
