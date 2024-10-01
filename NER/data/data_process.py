@@ -126,32 +126,6 @@ class NERDataProcessor(object):
                 outputs['text'].append(text)
                 outputs['label'].append(label)
                 text, label = [], []
-        '''Augmentation'''
-        # for line in lines:
-        #     if line:
-        #         text_ = line.split(' ')[0]
-        #         label_ = line.split(' ')[1] if not self.predict else 'O'
-        #         text.append(text_)
-        #         label.append(label_)
-        #     elif text:
-        #         outputs['text'].append(text)
-        #         outputs['label'].append(label)
-        #         text, label = [], []
-        # if 'train.tsv' in path:
-        #     with open(self.dev_path, 'r', encoding='utf-8') as f:
-        #         lines = f.readlines()
-        #     lines = [line.strip() for line in lines]
-        #     text, label = [], []
-        #     for line in lines:
-        #         if line:
-        #             text_ = line.split(' ')[0]
-        #             label_ = line.split(' ')[1] if not self.predict else 'O'
-        #             text.append(text_)
-        #             label.append(label_)
-        #         elif text:
-        #             outputs['text'].append(text)
-        #             outputs['label'].append(label)
-        #             text, label = [], []
         return outputs
 
     def _pre_cross_process(self, path, ids):
