@@ -1,8 +1,3 @@
-# encoding: utf-8
-# @author: xkchai
-# @contact: chaixiaokang@hust.edu.cn
-
-
 import os
 import json
 import tqdm
