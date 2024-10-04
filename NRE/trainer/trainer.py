@@ -257,9 +257,9 @@ class RETrainer(Trainer):
             pbar(step=step, info='')
 
         preds = np.argmax(preds, axis=1)
-        p = precision_score(eval_labels, preds)
-        r = recall_score(eval_labels, preds)
-        f1 = f1_score(eval_labels, preds)
+        p = precision_score(eval_labels, preds, average='macro')
+        r = recall_score(eval_labels, preds, average='macro')
+        f1 = f1_score(eval_labels, preds, average='macro')
         # p, r, f1, _ = re_metric(preds, eval_labels)
         logger.info("%s-%s precision: %s - recall: %s - f1 score: %s", args.task_name, args.model_name, p, r, f1)
         return p, r, f1, preds
@@ -299,9 +299,9 @@ class RETrainer(Trainer):
             pbar(step=step, info='')
 
         preds = np.argmax(preds, axis=1)
-        p = precision_score(test_labels, preds)
-        r = recall_score(test_labels, preds)
-        f1 = f1_score(test_labels, preds)
+        p = precision_score(test_labels, preds, average='macro')
+        r = recall_score(test_labels, preds, average='macro')
+        f1 = f1_score(test_labels, preds, average='macro')
         # p, r, f1, _ = re_metric(preds, test_labels)
         self._save_real_predict(preds, 'test')
         logger.info("%s-%s precision: %s - recall: %s - f1 score: %s", args.task_name, args.model_name, p, r, f1)
